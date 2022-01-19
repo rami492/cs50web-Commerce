@@ -17,16 +17,26 @@
             <div class="text-center p-2"><input type="submit" value="Search"></div>
         </form><br><hr><br>
 
-        {% if message %}
-            <p><small><em>{{ message }}</em></small></p>
-        {% else %}
-            <ul>
+        <div class="d-flex flex-column">
+            {% if message %}
+                <p><small><em>{{ message }}</em></small></p>
+            {% else %}
                 {% for listing in listings %}
-                <li>{{ listing.name }} {{ listing.price }} {{ listing.category }}</li>
+                <div class="listing p-2 mt-2 text-center">
+                    <img src="{{ listing.image.image.url }} " alt="image of listing" width="15%">
+                    <div class="">  
+                        <a href="{% url 'listing_page' listing.id %}"><h6><b>{{ listing.name }}</b></h6></a>
+                        
+                        <ul>
+                            <li><b>Category</b>: {{ listing.category }}</li>
+                            <li><b>Price</b>: $ {{ listing.price }}</li>
+                            <br>
+                            <li style="font-size: smaller; color:gray;"><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></li>
+                        </ul>
+                    </div>
+                </div>
                 {% endfor %}
-            </ul>
-        {% endif %}
+            {% endif %} 
+        </div>
 
-    </div>
-
-{% endblock %}
+{% endblock %} 
