@@ -1,0 +1,40 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+    <div class="container listing">
+        
+        <div class="text-center mb-5 bg-dark text-white">
+            <h1><strong>My Wishlist</strong></h1>
+        </div>
+        {% if message %}
+            <div class="text-center mb-5 pt-3"><small><em>{{ message }}</small></em></div>
+            {% else %}
+            {% for listing in listings %}
+                <div class="listing wishlist-display justify-content-between">            
+                
+                    <img src="{{ listing.image.image.url }} " alt="image of listing" width="15%">
+                    <div class="">  
+                        <a href="{% url 'listing_page' listing.id %}"><h6><b>{{ listing.name }}</b></h6></a>
+                        
+                        <ul>
+                            <li><b>Category</b>: {{ listing.category }}</li>
+                            <li><b>Price</b>: $ {{ listing.price }}</li>
+                            <br>
+                            <li style="font-size: smaller; color:gray;"><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></li>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <form action="{% url 'wishlist' %}" method="post">
+                            {% csrf_token %}
+                            <input name="listing_id" type="hidden" value="{{ listing.id }}">
+                            <button name="remove-btn" type="submit" class="btn btn-sm m-1 pt-0 btn-danger">remove</button>
+                        </form>
+                    </div>
+                    
+                </div>
+                <br><br>
+            {% endfor %}
+
+        {% endif %}
+    </div>
+{% endblock %}

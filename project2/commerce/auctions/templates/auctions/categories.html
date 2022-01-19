@@ -1,0 +1,32 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+    <div class="container">
+        <div class="text-center p-2"><h1>Current Categories</h1></div>
+
+        <form action="{% url 'categories' %}" method="post">
+            {% csrf_token %}
+            <div class="d-flex flex-row justify-content-around p-4">
+                {% for category in categories %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="category" id="{{ category }}" value="{{ category }}">
+                    <label for="{{ category }}" class="form-check-label">{{ category }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="text-center p-2"><input type="submit" value="Search"></div>
+        </form><br><hr><br>
+
+        {% if message %}
+            <p><small><em>{{ message }}</em></small></p>
+        {% else %}
+            <ul>
+                {% for listing in listings %}
+                <li>{{ listing.name }} {{ listing.price }} {{ listing.category }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+    </div>
+
+{% endblock %}
