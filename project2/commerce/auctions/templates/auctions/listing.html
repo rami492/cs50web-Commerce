@@ -48,7 +48,8 @@
         <h3><b>{{ listing.name }}</b></h3>
         <small><p>listing id: {{ listing.id }}</p></small>
         <p><em>category</em>: <strong>{{ listing.category }}</strong></p>
-        <div><p style="color:rgb(161, 10, 42); font-size: x-large;"><strong><span style="color:rgb(0, 0, 145);">Starting Bid:</span> $ {{ listing.price }}</strong></p></div><hr>
+        <div><p style="color:rgb(161, 10, 42); font-size: x-large;"><strong><span style="color:rgb(0, 0, 145);">Starting Bid:</span> $ {{ listing.price }}</strong></p></div>
+        <div><p>-- <em><b>({{ current_bids }}) bids so far</b></em> --</p></div><hr>
         <div style="background-color:blueviolet;"><p style="color:rgb(83, 247, 34); font-size: x-large;"><strong>Current Bid: $ {{ highest_bid }} </strong></p>
         {% if highest_bid == 0 %}
             <p>no bids yet</p>

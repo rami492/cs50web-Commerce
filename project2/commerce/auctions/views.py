@@ -171,6 +171,8 @@ def listing_page(request, listing_id):
     user = request.user
     date = datetime.datetime.now()
     comments = Comment.objects.filter(listing=listing_id).all()
+    current_bids = len(Bid.objects.filter(listing=listing_id).all())
+    
     highest_bidder = None
     bid = 0
     all_bids = Bid.objects.filter(listing=listing_id).all()
@@ -221,6 +223,7 @@ def listing_page(request, listing_id):
             "counter": counter,
             "comment": CommentForm(),
             "bid": BidForm(request.POST),
+            "current_bids": current_bids,
             "message": "bid must be greater than starting price",
             })
         elif bid <= highest_bid:   
@@ -233,6 +236,7 @@ def listing_page(request, listing_id):
             "highest_bidder": highest_bidder,
             "close_btn": close_btn,
             "counter": counter,
+            "current_bids": current_bids,
             "message": "bid must be greater than current highest bid",
             })
         else:
@@ -248,6 +252,7 @@ def listing_page(request, listing_id):
                 "bid": BidForm(),
                 "close_btn": close_btn,
                 "counter": counter,
+                "current_bids": current_bids,
                 "message1": "Bid placed succussfully", 
                 })
     
@@ -267,6 +272,7 @@ def listing_page(request, listing_id):
             "bid": BidForm(),
             "close_btn": close_btn,
             "counter": counter,
+            "current_bids": current_bids,
             "message1": "Comment Added", 
             })
 
@@ -283,6 +289,7 @@ def listing_page(request, listing_id):
             "bid": BidForm(),
             "close_btn": close_btn,
             "counter": counter,
+            "current_bids": current_bids,
             "message1": "Auction Closed", 
             })
 
@@ -300,6 +307,7 @@ def listing_page(request, listing_id):
                 "highest_bid": highest_bid,
                 "close_btn": close_btn,
                 "counter": counter,
+                "current_bids": current_bids,
                 "message1": "Added to Wishlist",
                 })
         
@@ -316,6 +324,7 @@ def listing_page(request, listing_id):
             "highest_bid": highest_bid,
             "close_btn": close_btn,
             "counter": counter,
+            "current_bids": current_bids,
             "message1": "Added to Watchlist",
             })          
         
@@ -336,6 +345,7 @@ def listing_page(request, listing_id):
         "bid": BidForm(),
         "close_btn": close_btn,
         "counter": counter,
+        "current_bids": current_bids,
     })
 
 

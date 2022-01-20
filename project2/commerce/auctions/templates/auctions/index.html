@@ -1,32 +1,28 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <div class="container">
-        <div>
-            <h1 class="mb-5 pt-3"><strong>Active Listings</strong></h1>
-        </div>
-        {% for listing in listings %}
-            <div class="listing">            
-                <div id="grid">
-                        <div class="grid-item">
-                            <img src="{{ listing.image.image.url }} " alt="image of listing">
-                        </div>
-                        
-                        <div class="grid-item">
-                            <a href="{% url 'listing_page' listing.id %}"><h3><b>{{ listing.name }}</b></h3></a>
-                            <br>
-                            <ul>
-                                <li><b>Category</b>: {{ listing.category }}</li>
-                                <li><b>Price</b>: $ {{ listing.price }}</li>
-                                <br>
-                                <li style="font-size: smaller; color:gray;"><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></li>
-                            </ul>
-                        </div>
-                        
-                    </div>
-            </div>
-            <br><br>    
-        {% endfor %}
-
+<div class="container">
+    <div>
+        <h1 class="mb-5 pt-3"><strong>Active Listings</strong></h1>
     </div>
+    {% for listing in listings %}
+        <div class="card" style="width: 55rem;">
+            <img class="card-img-top" src="{{ listing.image.image.url }}" alt="image of listing">
+            <div class="card-body">
+                <div class="text-center"><h3 class="card-title"><strong>{{ listing.name }}</strong></h3>
+                <p class="card-text"><small><b> - <em>{{ listing.category}}</em> - </b></small></p>
+                {% if listing.is_active == True %}
+                    <button class="btn btn-sm btn-success" style="width:100%;"><b>ACTIVE</b></button>
+                {% else %}
+                    <button class="btn btn-sm btn-danger" style="width:100%;"><b>CLOSED</b></button>
+                {% endif %}<hr></div>
+                <p class="card-text pl-2 pt-4">{{ listing.description }}</p>
+                <p class="card-text" style="color:darkred;"><b>Starting Bid - ${{ listing.price }}</b></p>
+                <p class="card-text" style="color: gray;"><small><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></small></p>
+                <a href="{% url 'listing_page' listing.id %}" class="btn btn-primary">View Details</a>
+            </div>
+        </div><br> 
+    {% endfor %}
+
+</div>
 {% endblock %}
