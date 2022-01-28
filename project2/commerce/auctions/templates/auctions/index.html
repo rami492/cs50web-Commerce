@@ -6,9 +6,9 @@
         <h1 class="mb-5 pt-3 text-center"><strong>Active Listings</strong></h1>
     </div>
 
-    <div class="row pt-5">
+    <div class="row pt-5" id="listinglink">
         {% for listing in listings %}
-            <div class="col-sm">
+            <a href="{% url 'listing_page' listing.id %}" style="text-decoration: none; color: black;" class="a-link"><div class="col-sm">
                 <div class="card" style="width: 29rem;">
                     <img class="card-img-top" src="{{ listing.image.image.url }}" alt="image of listing">
                     <div class="card-body">
@@ -22,9 +22,9 @@
                         <p class="card-text pl-2 pt-0"><small>{{ listing.description }}</small></p>
                         <p class="card-text" style="color:darkred;"><b>Starting Bid - ${{ listing.price }}</b></p>
                         <p class="card-text" style="color: gray;"><small><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></small></p>
-                        <a href="{% url 'listing_page' listing.id %}" class="btn btn-primary">View Details</a>
+                        <a href="#" class="btn btn-primary">Buy Now</a>
                     </div>
-                </div><br>
+                </div></a><br>
             </div>
         {% endfor %}
     </div>
