@@ -1,0 +1,27 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+<div class="container pt-5">
+    <div class="listing wishlist-display justify-content-between" style="width:800px;">            
+                
+        <img src="{{ listing.image.image.url }} " alt="image of listing" width="30%">
+        <div class="">  
+            <h6><b>{{ listing.name }}</b></h6>
+            
+            <ul>
+                <li><small><b>Category</b>: {{ listing.category }}</small></li>
+                <li><small><b>Price</b>: $ {{ listing.price }}</small></li>
+                <br>
+                <li style="font-size: smaller; color:gray;"><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></li>
+            </ul>
+        </div>
+        <div>
+            <form action="{% url 'listing_page' listing.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" class="btn-sm btn-primary m-1" value="view">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

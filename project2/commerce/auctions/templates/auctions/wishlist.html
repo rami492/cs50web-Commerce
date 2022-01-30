@@ -1,7 +1,7 @@
 {% extends 'auctions/layout.html' %}
 
 {% block body %}
-    <div class="container listing">
+    <div class="container listing pt-5">
         
         <div class="text-center mb-5 bg-dark text-white">
             <h1><strong>My Wishlist</strong></h1>
@@ -23,7 +23,7 @@
                             <li style="font-size: smaller; color:gray;"><em>listed on {{ listing.timestamp }} by {{listing.user.first_name}} {{listing.user.last_name}}</em></li>
                         </ul>
                     </div>
-                    <div class="">
+                    <div>
                         <form action="{% url 'wishlist' %}" method="post">
                             {% csrf_token %}
                             <input name="listing_id" type="hidden" value="{{ listing.id }}">

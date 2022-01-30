@@ -419,3 +419,23 @@ def categories(request):
         "categories": categories,
     })
 
+
+def search(request):
+    if request.method == "POST":
+        query = request.POST.get('search')
+        try:
+            int(query)
+            try:
+                listing = AuctionListing.objects.get(id=query)
+
+                return render(request, "auctions/search.html", {
+                    "listing": listing,
+                })
+            except AuctionListing.DoesNotExist:
+                return render(request, "auctions/error.html", {
+                    "message": "No Results."
+                })
+        except ValueError:
+            return render(request, "auctions/error.html", {
+                "message": "No Match.",
+            })

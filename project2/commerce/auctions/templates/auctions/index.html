@@ -1,15 +1,15 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid pt-3">
     <div>
         <h1 class="mb-5 pt-3 text-center"><strong>Active Listings</strong></h1>
     </div>
 
-    <div class="row pt-5" id="listinglink">
+    <div class=" pt-5 d-flex flex-row" id="listinglink">
         {% for listing in listings %}
             <a href="{% url 'listing_page' listing.id %}" style="text-decoration: none; color: black;" class="a-link"><div class="col-sm">
-                <div class="card" style="width: 29rem;">
+                <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
                     <img class="card-img-top" src="{{ listing.image.image.url }}" alt="image of listing">
                     <div class="card-body">
                         <div class="text-center"><h3 class="card-title"><strong>{{ listing.name }}</strong></h3>
