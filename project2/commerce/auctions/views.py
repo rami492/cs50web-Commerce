@@ -385,8 +385,12 @@ def wishlist(request):
 def categories(request):
     user = request.user
     counter = 0
-    categories = ['Home', 'Fashion','Beauty', 'Comics', 'Education', 'Food/Beverage', 'Technology', 'Art', 'Pets', 'Other']
-
+    categories = set()
+    listings = AuctionListing.objects.filter().all()
+    
+    for listing in listings:
+        categories.add(listing.category)
+    
     if user.is_authenticated:
         try:
             user_wishlist = Wishlist.objects.get(user=User.objects.get(pk=user.id))
